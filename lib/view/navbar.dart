@@ -17,8 +17,8 @@ class NavBarState extends State<NavBar> {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('Gerson Cleiton'),
-            accountEmail: Text('example@gmail.com'),
+            accountName: const Text('Gerson Cleiton'),
+            accountEmail: const Text('example@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -29,7 +29,7 @@ class NavBarState extends State<NavBar> {
                 ),
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
               image: DecorationImage(
                   fit: BoxFit.fill,
@@ -38,24 +38,24 @@ class NavBarState extends State<NavBar> {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Opção 1'),
-            onTap: () => null,
+            leading: const Icon(Icons.person),
+            title: const Text('Opção 1'),
+            onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.person_add),
-            title: Text('Opção 2'),
-            onTap: () => null,
+            leading: const Icon(Icons.person_add),
+            title: const Text('Opção 2'),
+            onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.share),
-            title: Text('Opção 3'),
-            onTap: () => null,
+            leading: const Icon(Icons.share),
+            title: const Text('Opção 3'),
+            onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Opção 4'),
-            onTap: () => null,
+            leading: const Icon(Icons.settings),
+            title: const Text('Opção 4'),
+            onTap: () {},
           ),
         ],
       ),

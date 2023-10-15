@@ -5,19 +5,21 @@ import 'package:pac_04/utils/network.dart';
 import '../utils/headerPage.dart';
 
 class AdicionarCertificado extends StatefulWidget {
+  const AdicionarCertificado({super.key});
+
   @override
   State<AdicionarCertificado> createState() => _AdicionarCertificado();
 }
 
 class _AdicionarCertificado extends State<AdicionarCertificado> {
-  var nomeCursoController = new TextEditingController();
-  var nomeCertificadoController = new TextEditingController();
-  var horasCertificadoController = new TextEditingController();
+  var nomeCursoController = TextEditingController();
+  var nomeCertificadoController = TextEditingController();
+  var horasCertificadoController = TextEditingController();
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
 
-  void AddCertificate() {
+  void addCertificate() {
     try {
       final certificate = <String, dynamic>{
         "nomeCurso": nomeCursoController.text,
@@ -36,69 +38,70 @@ class _AdicionarCertificado extends State<AdicionarCertificado> {
 
   int numberCertificates = 1;
 
-  Row GetCertificateAdd() {
+  Row getCertificateAdd() {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
-            margin: EdgeInsets.only(top: 10),
-            child: FieldGenerator("Titulo Certificado",nomeCertificadoController),
+            margin: const EdgeInsets.only(top: 10),
+            child: fieldGenerator("Titulo Certificado",nomeCertificadoController),
           ),
           Container(
-              margin: EdgeInsets.only(top: 10),
-              child: FieldGenerator("Horas",horasCertificadoController)
+              margin: const EdgeInsets.only(top: 10),
+              child: fieldGenerator("Horas",horasCertificadoController)
           )
         ]
     );
   }
 
-  SizedBox FieldGenerator(String fieldName,TextEditingController controller) {
+  SizedBox fieldGenerator(String fieldName,TextEditingController controller) {
     return SizedBox(
         width: 250,
         child: TextField(
           controller: controller,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               hintText: fieldName,
             ))
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     var listCertificates = <Widget>[];
-    listCertificates.add(GetCertificateAdd());
+    listCertificates.add(getCertificateAdd());
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Header.GetHeader("Adicionar Certificado"),
+                Header.getHeader("Adicionar Certificado"),
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
-                      Text("Informe o nome do curso:"),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 20),
+                      const Text("Informe o nome do curso:"),
+                      const SizedBox(height: 5),
                       SizedBox(
                           width: MediaQuery
                               .of(context)
                               .size
                               .width,
                           height: 30,
-                          child: Container(
+                          child: SizedBox(
                             height: 36,
                             child: TextField(
                               controller:nomeCursoController,
                               maxLines: 1,
-                              style: TextStyle(fontSize: 17),
+                              style: const TextStyle(fontSize: 17),
                               textAlignVertical: TextAlignVertical.center,
                               decoration: InputDecoration(
                                 filled: true,
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(30))),
@@ -106,7 +109,7 @@ class _AdicionarCertificado extends State<AdicionarCertificado> {
                                     .of(context)
                                     .inputDecorationTheme
                                     .fillColor,
-                                contentPadding: EdgeInsets.only(left: 5),
+                                contentPadding: const EdgeInsets.only(left: 5),
                               ),
                             ),
                           )
@@ -114,27 +117,26 @@ class _AdicionarCertificado extends State<AdicionarCertificado> {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                     width: 800,
                     child: ListView.builder(shrinkWrap: true,
                         itemCount: numberCertificates,
                         itemBuilder: (_, index) {
-                          return GetCertificateAdd();
+                          return getCertificateAdd();
                         })),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   alignment: Alignment.center,
                   child: ElevatedButton(
                       onPressed: () =>
                       {
-                        AddCertificate(),
-                        Newtwork.Criar(context)
-                      }, child: Text("Enviar certificados")),
+                        addCertificate(),
+                        Newtwork.criar(context)
+                      }, child: const Text("Enviar certificados")),
                 )
               ],
             )
         ),
-      ),
-    );
+      );
   }
 }

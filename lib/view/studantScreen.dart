@@ -16,7 +16,10 @@ class CertificateDto{
 }
 
 class ListCertificatesStudant extends StatefulWidget{
+  const ListCertificatesStudant({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ListCertificatesStudant createState()=>_ListCertificatesStudant();
 }
 
@@ -26,16 +29,15 @@ class _ListCertificatesStudant extends State<ListCertificatesStudant> {
   void getCertificatesFromBD() async {
     var query = await db.collection("certificate").get();
 
-    query.docs.forEach((doc){
-      var dto = new CertificateDto();
-      print(doc.data()["horasCertificado"]);
+    for (var doc in query.docs) {
+      var dto = CertificateDto();
       dto.horasCertificate = doc.data()["horasCertificado"];
       dto.courseCertificate  = doc.data()["nomeCurso"];
       dto.nameCertificate = doc.data()["nomeCertificado"];
       setState((){
         listCertificados.add(dto);
       });
-    });
+    }
   }
 
   @override
@@ -51,47 +53,38 @@ class _ListCertificatesStudant extends State<ListCertificatesStudant> {
   @override
   Widget build(BuildContext context) {
 
-    ButtonStyle GetButtonStyle() {
-      return ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll<Color>(
-              Color.fromARGB(255, 217, 217, 217)),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0))));
-    }
-
     List<Widget> getCertificateRegister() {
 
       var listObj = <Widget>[];
-      listCertificados.forEach((element) {
+      for (var element in listCertificados) {
         listObj.add( Container(
           width: 290,
           height: 110,
-          margin: EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 217, 217, 217),
+              color: const Color.fromARGB(255, 217, 217, 217),
               borderRadius: BorderRadius.circular(10)),
           child: Row(
             children: [
               Container(
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   width: 160,
                   child: Column(
                     children: [
                       Text(element.courseCertificate,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 6),
+                      const SizedBox(height: 6),
                       ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.grey),
+                            const MaterialStatePropertyAll<Color>(Colors.grey),
                             shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
                                 ))),
-                        child: Text(
+                        child: const Text(
                           'Pendente',
                           style: TextStyle(fontSize: 12.0),
                         ),
@@ -111,10 +104,10 @@ class _ListCertificatesStudant extends State<ListCertificatesStudant> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Horas:", style: TextStyle(fontSize: 10)),
-                    Text(element.horasCertificate + "h",
+                    const Text("Horas:", style: TextStyle(fontSize: 10)),
+                    Text("${element.horasCertificate}h",
                         style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+                        const TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
                   ],
                 ),
               ),
@@ -127,11 +120,11 @@ class _ListCertificatesStudant extends State<ListCertificatesStudant> {
                               CertificateDetails(Horas: element.horasCertificate)),
                     ),
                   },
-                  icon: Icon(Icons.more_vert))
+                  icon: const Icon(Icons.more_vert))
             ],
           ),
         ));
-      });
+      }
 
       return listObj;
 

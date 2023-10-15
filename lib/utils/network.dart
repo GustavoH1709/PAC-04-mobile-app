@@ -9,13 +9,13 @@ class Newtwork  {
   {
     // configura o button
     Widget okButton = ElevatedButton(
-      child: Text("OK"),
+      child: const Text("OK"),
       onPressed: () { },
     );
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
-      title: Text("Login Inválido ou senha inválido"),
-      content: Text("Por favor, tente novamente!"),
+      title: const Text("Login Inválido ou senha inválido"),
+      content: const Text("Por favor, tente novamente!"),
       actions: [
         okButton,
       ],
@@ -30,11 +30,11 @@ class Newtwork  {
   }
 
 
-  static Criar(BuildContext context)
+  static criar(BuildContext context)
   {
     // configura o button
     Widget okButton = ElevatedButton(
-      child: Text("OK"),
+      child: const Text("OK"),
       onPressed: () {
         Navigator.push(
           context,
@@ -44,8 +44,8 @@ class Newtwork  {
     );
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
-      title: Text("Certificado criado com sucesso."),
-      content: Text("Agora seu certificado está pendente de aprovação."),
+      title: const Text("Certificado criado com sucesso."),
+      content: const Text("Agora seu certificado está pendente de aprovação."),
       actions: [
         okButton,
       ],
@@ -59,7 +59,7 @@ class Newtwork  {
     );
   }
 
-  static bool ValidateUser(String email){
+  static bool validateUser(String email){
     return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
     .hasMatch(email); 
   }

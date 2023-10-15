@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class Header {
-  static Container GetHeader(String namePage) {
+  static Container getHeader(String namePage) {
     return Container(
       height: 50,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Color.fromARGB(100, 217, 217, 217),
             border: Border(
                 bottom: BorderSide(
@@ -16,10 +16,10 @@ class Header {
                 height: 45.0,
                 child: Image.asset("assets/images/user_image.png",
                     fit: BoxFit.contain)),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               namePage,
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             )
           ],
         ));
